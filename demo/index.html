@@ -554,6 +554,223 @@
         transform: rotate(-1.5deg);
         border-radius: 2px;
       }
+
+      /* --- Modal / Instruction Popup --- */
+      .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(3px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s ease-in-out;
+      }
+      .modal-overlay.show {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .modal-card {
+        width: 90%;
+        max-width: 520px;
+        background: #fdfaf2;
+        border: 4px solid #1a1a1a;
+        border-radius: 20px 10px 24px 12px/12px 24px 10px 20px;
+        box-shadow: 8px 10px 0px #1a1a1a;
+        padding: 28px;
+        position: relative;
+        transform: rotate(0.5deg);
+        box-sizing: border-box;
+      }
+      .modal-tape {
+        position: absolute;
+        top: -16px;
+        left: 50%;
+        transform: translateX(-50%) rotate(-1deg);
+        width: 110px;
+        height: 28px;
+        background: rgba(244, 237, 210, 0.8);
+        border: 2px dashed rgba(0, 0, 0, 0.15);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      }
+      .modal-close-btn {
+        position: absolute;
+        top: 12px;
+        right: 16px;
+        background: none;
+        border: none;
+        font-size: 26px;
+        font-weight: bold;
+        cursor: pointer;
+        color: #1a1a1a;
+        font-family: 'Architects Daughter', cursive;
+        line-height: 1;
+        padding: 4px;
+        transition: transform 0.15s ease;
+      }
+      .modal-close-btn:hover {
+        color: #a12323;
+        transform: scale(1.2) rotate(5deg);
+      }
+      .modal-title {
+        font-family: 'Architects Daughter', cursive;
+        font-size: 28px;
+        color: #0b3d91;
+        margin-top: 10px;
+        margin-bottom: 18px;
+        text-align: center;
+        position: relative;
+        display: inline-block;
+        left: 50%;
+        transform: translateX(-50%) rotate(-1deg);
+      }
+      .modal-title::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: -8px;
+        right: -8px;
+        height: 6px;
+        background: rgba(255, 235, 59, 0.4);
+        z-index: -1;
+        border-radius: 2px;
+      }
+      .modal-section {
+        margin-bottom: 20px;
+      }
+      .modal-section h3 {
+        font-family: 'Architects Daughter', cursive;
+        font-size: 18px;
+        color: #a12323;
+        margin: 0 0 8px 0;
+        border-bottom: 2px dashed #ccc;
+        padding-bottom: 4px;
+      }
+      .modal-section ol {
+        margin: 0;
+        padding-left: 20px;
+        font-size: 14px;
+        line-height: 1.4;
+      }
+      .modal-section li {
+        margin-bottom: 6px;
+      }
+      .modal-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 24px;
+        padding-top: 14px;
+        border-top: 2px dashed #ccc;
+      }
+      .modal-checkbox-label {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 13px;
+        cursor: pointer;
+        user-select: none;
+      }
+      .modal-checkbox-label input[type="checkbox"] {
+        accent-color: #0b3d91;
+        cursor: pointer;
+      }
+
+      /* --- Mobile Responsiveness Optimization --- */
+      @media (max-width: 600px) {
+        body {
+          padding: 8px;
+        }
+        .notebook-page {
+          padding: 16px 12px 16px 16px;
+          border-radius: 12px 6px 16px 8px/8px 16px 6px 12px;
+          background-image: 
+            linear-gradient(#90c0f0 1px, transparent 1px),
+            linear-gradient(90deg, transparent 39px, #e89090 39px, #e89090 41px, transparent 41px);
+          background-size: 100% 28px, 100% 100%;
+        }
+        .spiral-ring {
+          display: none; /* hide spiral rings on mobile because the screen is too narrow */
+        }
+        header {
+          margin-left: 45px;
+          padding-bottom: 12px;
+        }
+        header h1 {
+          font-size: 32px;
+        }
+        header p {
+          font-size: 13px;
+        }
+        nav {
+          flex-wrap: wrap;
+          gap: 8px;
+          margin-top: 12px;
+          width: 100%;
+        }
+        button.tab-btn {
+          font-size: 14px;
+          padding: 6px 14px;
+          flex: 1 1 auto;
+          text-align: center;
+        }
+        #open-instructions {
+          margin-left: 0;
+          width: 100%;
+          text-align: center;
+          order: 3; /* place help button below the tabs */
+        }
+        main {
+          margin-left: 45px;
+          margin-top: 16px;
+          gap: 16px;
+        }
+        fieldset {
+          padding: 12px;
+        }
+        legend {
+          font-size: 15px;
+        }
+        .post-it {
+          margin-left: 45px;
+          padding: 10px;
+          font-size: 11px;
+        }
+        /* --- Modal Popup Mobile Optimization --- */
+        .modal-card {
+          padding: 18px;
+          width: 92%;
+          max-width: 420px;
+        }
+        .modal-title {
+          font-size: 22px;
+          margin-bottom: 12px;
+        }
+        .modal-section h3 {
+          font-size: 16px;
+        }
+        .modal-section ol {
+          font-size: 13px;
+          padding-left: 16px;
+        }
+        .modal-footer {
+          flex-direction: column-reverse;
+          gap: 12px;
+          align-items: stretch;
+        }
+        .modal-checkbox-label {
+          justify-content: center;
+        }
+        #close-modal-btn {
+          width: 100%;
+        }
+      }
     </style>
   </head>
   <body>
@@ -592,9 +809,10 @@
         <p>
           optical data transmission protocol. files cross the air gap using wobbly QR loops, captured by camera on the other side.
         </p>
-        <nav>
+        <nav style="display: flex; align-items: center; width: 100%;">
           <button id="mode-send" aria-selected="true" class="tab-btn">Transmit Page</button>
           <button id="mode-recv" aria-selected="false" class="tab-btn">Receive Page</button>
+          <button id="open-instructions" class="btn-sketch" style="margin-left: auto; padding: 6px 12px; font-size: 14px;" title="Show instructions">❓ Help</button>
         </nav>
       </header>
 
@@ -713,6 +931,44 @@
           </div>
         </section>
       </main>
+    </div>
+
+    <!-- Instructions Modal Overlay -->
+    <div id="instructions-modal" class="modal-overlay">
+      <div class="modal-card">
+        <div class="modal-tape"></div>
+        <button id="close-modal-top" class="modal-close-btn">&times;</button>
+        <h2 class="modal-title">How to use Cypher</h2>
+        
+        <div class="modal-section">
+          <h3>📤 Transmitting Files</h3>
+          <ol>
+            <li>Select a file in the <strong>File Loader Slot</strong>.</li>
+            <li>(Optional) Enter a <strong>Key Phrase</strong> for private/encrypted broadcast.</li>
+            <li>Adjust <strong>Velocity (FPS)</strong> if needed.</li>
+            <li>Click <strong>▶ Start Loop</strong> to begin flashing QR codes.</li>
+            <li>Use <strong>Popout</strong> to display in a separate window or <strong>Save video</strong> to record it.</li>
+          </ol>
+        </div>
+
+        <div class="modal-section">
+          <h3>📥 Receiving Files</h3>
+          <ol>
+            <li>Enter the matching <strong>Key Phrase</strong> (if encrypted).</li>
+            <li>Click <strong>Start Camera</strong> and point it at the transmitter's screen.</li>
+            <li>Or upload a pre-recorded loop video using <strong>LOAD RECORDING...</strong>.</li>
+            <li>Keep the camera steady! The file downloads automatically when complete.</li>
+          </ol>
+        </div>
+
+        <div class="modal-footer">
+          <label class="modal-checkbox-label">
+            <input type="checkbox" id="dont-show-again" />
+            <span>Don't show this again</span>
+          </label>
+          <button id="close-modal-btn" class="btn-sketch btn-sketch-primary">Got it!</button>
+        </div>
+      </div>
     </div>
 
     <script type="module" src="/src/main_code.ts"></script>

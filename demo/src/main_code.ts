@@ -424,3 +424,46 @@ getEl("recv-stop").addEventListener("click", () => {
   stopRxMode();
   updateRxStatus("Stopped.");
 });
+
+// ---------------- INSTRUCTIONS MODAL (POPUP) ----------------
+const instructionsModal = getEl("instructions-modal");
+const openInstructionsBtn = getEl("open-instructions");
+const closeModalTop = getEl("close-modal-top");
+const closeModalBtn = getEl("close-modal-btn");
+const dontShowAgainCheckbox = getEl<HTMLInputElement>("dont-show-again");
+
+function showInstructions() {
+  instructionsModal.classList.add("show");
+}
+
+function hideInstructions() {
+  instructionsModal.classList.remove("show");
+  if (dontShowAgainCheckbox.checked) {
+    localStorage.setItem("cypher_dismiss_instructions", "true");
+  } else {
+    localStorage.setItem("cypher_dismiss_instructions", "false");
+  }
+}
+
+// Open modal on click
+openInstructionsBtn.addEventListener("click", () => {
+  dontShowAgainCheckbox.checked = localStorage.getItem("cypher_dismiss_instructions") === "true";
+  showInstructions();
+});
+
+// Close modal handlers
+closeModalTop.addEventListener("click", hideInstructions);
+closeModalBtn.addEventListener("click", hideInstructions);
+instructionsModal.addEventListener("click", (e) => {
+  if (e.target === instructionsModal) {
+    hideInstructions();
+  }
+});
+
+// Show automatically on page load if not dismissed
+const isDismissed = localStorage.getItem("cypher_dismiss_instructions") === "true";
+dontShowAgainCheckbox.checked = isDismissed;
+if (!isDismissed) {
+  showInstructions();
+}
+
