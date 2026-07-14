@@ -1,0 +1,161 @@
+[
+  {
+    "key": "7713b4cc57447f2a341505d12086f2a075a8b1a720b8560bc33decff03210d03",
+    "kind": "scrypt_phrase",
+    "phrase": "alpha-bravo-charlie-delta"
+  },
+  {
+    "key": "1230db81fb2f08ab6ae399888df860b4509bb977acfb9cb56c0965ca8773dd01",
+    "kind": "scrypt_phrase",
+    "phrase": "donkey-piano-river"
+  },
+  {
+    "key": "614370496ccbce5d48cc28fba3f1dc928c799850f6cb2d46bb1b7599ec894a94",
+    "kind": "scrypt_phrase",
+    "phrase": "Caf\u00e9-River Two"
+  },
+  {
+    "info": "cypher-v1-session",
+    "kind": "hkdf_session",
+    "my_ephemeral_seed": "202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f",
+    "session_id": 81985529216486895,
+    "session_key": "397946a917600842a23c70f24e0fdb4b03abd1d3451da8b00c3b112a6395bf9d",
+    "their_ephemeral_pub": "79a631eede1bf9c98f12032cdeadd0e7a079398fc786b88cc846ec89af85a51a"
+  },
+  {
+    "info": "cypher-v1-psk",
+    "kind": "hkdf_psk",
+    "psk": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+    "session_id": 81985529216486895,
+    "session_key": "63b555514145e77a11e7f182745018161eea376925a4195c9acb7e69615f6281"
+  },
+  {
+    "info": "cypher-v1-pin",
+    "key": "766ebbf3ef45ebf208caa7c1793ad4362dc59baeea0b72bf5c4f94d0a015c6a4",
+    "kind": "hkdf_pin",
+    "pin": "490601"
+  },
+  {
+    "frame_number": 0,
+    "kind": "gcm_nonce",
+    "nonce": "012345670000000000000000",
+    "session_id": 81985529216486895
+  },
+  {
+    "frame_number": 42,
+    "kind": "gcm_nonce",
+    "nonce": "01234567000000000000002a",
+    "session_id": 81985529216486895
+  },
+  {
+    "frame_number": 1048575,
+    "kind": "gcm_nonce",
+    "nonce": "0123456700000000000fffff",
+    "session_id": 81985529216486895
+  },
+  {
+    "aad": "50002a030024",
+    "ciphertext_and_tag": "8d5ea9190da157881dcac52462d6d88160394747ee2a5e94d0d5602b99ba3431a690f5cd",
+    "flags": 3,
+    "frame_number": 42,
+    "frame_payload": "8d5ea9190da157881dcac52462d6d88160394747ee2a5e94d0d5602b99ba3431a690f5cd",
+    "key": "766ebbf3ef45ebf208caa7c1793ad4362dc59baeea0b72bf5c4f94d0a015c6a4",
+    "kind": "aes_gcm_unicast",
+    "plaintext": "000102030405060708090a0b0c0d0e0f10111213",
+    "session_id": 81985529216486895
+  },
+  {
+    "aad": "5003e70100d8",
+    "ciphertext_and_tag": "fe84e91bc2611a1e4451daf564326f25b578fa5ee15c28e43010c30168e5313a5c95e2fd17964cf029abd42e776c513e761c7be57929f3cc70ebb7010b857d5b15cf715449d39253d7297777b862520216fdf2730ba97b9bd12d3ae2b1a9e28439fbb5f2ae14ad07514aaf13610851414fa8de6c9a0a1638bfb3718927c63ab8b3f21f1446f2a51e6a641effc22a149bda680e1e929c88fbde9a73a1beb9d2a1c126a920a966b2e5cf3e3262f85f4718836bfd86dfb3f84e2e3899f2625fed10edcc8c532a6c29f7536b408cd68b2e5d51ca74f8bb9fb339",
+    "flags": 1,
+    "frame_number": 999,
+    "frame_payload": "fe84e91bc2611a1e4451daf564326f25b578fa5ee15c28e43010c30168e5313a5c95e2fd17964cf029abd42e776c513e761c7be57929f3cc70ebb7010b857d5b15cf715449d39253d7297777b862520216fdf2730ba97b9bd12d3ae2b1a9e28439fbb5f2ae14ad07514aaf13610851414fa8de6c9a0a1638bfb3718927c63ab8b3f21f1446f2a51e6a641effc22a149bda680e1e929c88fbde9a73a1beb9d2a1c126a920a966b2e5cf3e3262f85f4718836bfd86dfb3f84e2e3899f2625fed10edcc8c532a6c29f7536b408cd68b2e5d51ca74f8bb9fb339",
+    "key": "766ebbf3ef45ebf208caa7c1793ad4362dc59baeea0b72bf5c4f94d0a015c6a4",
+    "kind": "aes_gcm_unicast",
+    "plaintext": "73a9bef499bbf4dc7bd2a4f2c8af5bd99f267a0ed3197217dd2bba1537436e5c2441e3d54410492b788768bcff2218cf8f7373abe8e394daf807e24e58c367402e281f9bddf85336d15b579b74e4250950c9c994752666ae81c78b283592edff935d406e8fdb72a34980be64d347bdcdda5117b919f538dcb77eacfe863e5282fa940bf3eb573f5fc12f4f8b12cd8aefd2f6e1716f7b8780ce6cab44e78db5e6265632094a04fcde45a00607b90c305da0480377e97e8dee32ee8651ab4f62e86fa84861a6c4716c",
+    "session_id": 81985529216486895
+  },
+  {
+    "aad": "50000701007c",
+    "ciphertext_and_tag": "6c85265331afc82f78f4f496b17eb7143eff014df079a8385e8c7d99034127647cf013a87d7bd64b19b2f2eab07d813fcbea8dc7e6ac0181990b0e9b74614b8e1deb68c2daa3578525900a832ac1934408bafa04040e6623d623926ca98d61d3c95026fecb6d6c2899a4322609e6e57e006cf721",
+    "flags": 1,
+    "frame_number": 7,
+    "frame_payload": "0123456789abcdef6c85265331afc82f78f4f496b17eb7143eff014df079a8385e8c7d99034127647cf013a87d7bd64b19b2f2eab07d813fcbea8dc7e6ac0181990b0e9b74614b8e1deb68c2daa3578525900a832ac1934408bafa04040e6623d623926ca98d61d3c95026fecb6d6c2899a4322609e6e57e006cf721",
+    "key": "766ebbf3ef45ebf208caa7c1793ad4362dc59baeea0b72bf5c4f94d0a015c6a4",
+    "kind": "aes_gcm_broadcast",
+    "plaintext": "fd3feb3c9250b7974a9b528b69636321a461b55ef55b7beafd809a9a9e925b79a6342fa0fdb8b294d97fc6103d92089b25fa5e039f52a8e8a95f64d6589c1f7844066542ec38008d331dfd3b272416317694e2fe860397b774306378b5437d8a755622d6",
+    "session_id": 81985529216486895,
+    "sid_prefix": "0123456789abcdef"
+  },
+  {
+    "identity_pub": "03a107bff3ce10be1d70dd18e74bc09967e4d6309ba50d5f1ddc8664125531b8",
+    "identity_seed": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+    "kind": "ed25519",
+    "message": "",
+    "signature": "9ca53579530654d5c3df77089ef45eda613e2fedf670e96bedac4639504e5845ef4b95d5793077233dd16817b2532e9c5525872a73a4ad74b759369a9e05c102"
+  },
+  {
+    "identity_pub": "03a107bff3ce10be1d70dd18e74bc09967e4d6309ba50d5f1ddc8664125531b8",
+    "identity_seed": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+    "kind": "ed25519",
+    "message": "73656d6170686f7265",
+    "signature": "251d6d2917500b02698d9814463b9a11c8a1ef035fd70bb4fb45159c7ff020b095b8129a5debef9ca0eef8c9b443426dd2de84ad78f8cf94677bbda01d54fc09"
+  },
+  {
+    "identity_pub": "03a107bff3ce10be1d70dd18e74bc09967e4d6309ba50d5f1ddc8664125531b8",
+    "identity_seed": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+    "kind": "ed25519",
+    "message": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f",
+    "signature": "91ad473ae89dd1e7c2983ec2d0445fef4dd124e377a4b673b249267ed80b604fa7d7d2b08b54990390a8760c616bc15607aa3ab9c3bfc97f7dd59e1734b8ed04"
+  },
+  {
+    "hash": "83a0f83e14bf1a66d4d05b68cf6b249de8833f5c044113b197d61ef878f0fd11",
+    "kind": "pairing_token_hash",
+    "pairing_token": "000102030405060708090a0b0c0d0e0f",
+    "session_id": 81985529216486895
+  },
+  {
+    "fingerprint": "56475aa75463474c0285df5dbf2bcab73da651358839e9b77481b2eab107708c",
+    "identity_pub": "03a107bff3ce10be1d70dd18e74bc09967e4d6309ba50d5f1ddc8664125531b8",
+    "kind": "fingerprint"
+  },
+  {
+    "kind": "phrase_normalize",
+    "phrase": "Caf\u00e9-River",
+    "tokens": [
+      "cafe",
+      "river"
+    ]
+  },
+  {
+    "kind": "phrase_normalize",
+    "phrase": "donkey  PIANO-river",
+    "tokens": [
+      "donkey",
+      "piano",
+      "river"
+    ]
+  },
+  {
+    "kind": "phrase_normalize",
+    "phrase": "Hello \u4e16\u754c World",
+    "tokens": [
+      "hello",
+      "world"
+    ]
+  },
+  {
+    "kind": "phrase_normalize",
+    "phrase": "  ",
+    "tokens": []
+  },
+  {
+    "kind": "phrase_normalize",
+    "phrase": "Two_Words.Here",
+    "tokens": [
+      "two",
+      "words",
+      "here"
+    ]
+  }
+]

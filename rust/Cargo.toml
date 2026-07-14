@@ -1,0 +1,77 @@
+[package]
+name = "cypher"
+version = "0.1.7"
+edition = "2021"
+license = "MIT"
+description = "Cypher optical data transmission protocol - production implementation"
+repository = "https://github.com/konsept/cypher"
+
+[lib]
+name = "cypher"
+path = "src/lib.rs"
+
+[[bin]]
+name = "cypher"
+path = "src/main.rs"
+
+[workspace]
+members = ["core"]
+# wasm-only binding; built via wasm-pack, never by the native workspace build.
+# uniffi binding built on its own (cargo build -p cypher-ffi); kept out of
+# the workspace so `cargo test --workspace` is unaffected.
+exclude = ["bindings/wasm", "bindings/uniffi"]
+
+[dependencies]
+# Protocol core - wire format, crypto, fountain, sessions primitives.
+cypher-core = { path = "core" }
+# CLI
+clap = { version = "4", features = ["derive"] }
+# Crypto used directly by the CLI (session key exchange / signing / RNG);
+# the full RustCrypto stack lives in cypher-core.
+x25519-dalek = { version = "2", features = ["static_secrets"] }
+ed25519-dalek = { version = "2", features = ["rand_core"] }
+rand = "0.8"
+# Wire format - CRC_16_IBM_3740 used directly by the CLI session codec.
+crc = "3"          # CRC_16_IBM_3740 == binascii.crc_hqx(data, 0xFFFF)
+# Visual carrier - same C++ engine as the Python decoder, writer included
+zxing-cpp = { version = "0.5", features = ["image", "bundled"] }
+image = "0.25"
+imageproc = "0.25"
+ab_glyph = "0.2"
+# Video + camera (mp4v decode requires ffmpeg; also camera capture)
+ffmpeg-sidecar = "2"
+minifb = "0.27"
+# Plumbing
+thiserror = "2"
+anyhow = "1"
+
+[dev-dependencies]
+# Conformance-vector tests parse the JSON vectors in tests/vectors/.
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+proptest = "1"
+hex = "0.4"
+tempfile = "3"
+# p1.rs constructs a content-size-less zstd frame directly to test decompress.
+zstd = "0.13"
+# p2/conformance recompute wordlist/vector SHA-256 to pin conformance vectors.
+sha2 = "0.10"
+
+# Build the bundled zxing-cpp C++ optimized (NDEBUG) even in dev/test, so
+# cmake-rs picks Release and compiles out zxing's internal debug assertions.
+# Without this, a development-only bounds assert (Matrix.h operator()) aborts
+# the process on rare adversarial/heavily-distorted QR images during the
+# decoder's geometry search - a upstream debug aid, never reached in the
+# shipping release binary (proven: 5000 distorted frames decode with zero
+# crashes in release). This keeps `cargo test` stable and exercises the same
+# C++ config that ships. Our own Rust code stays debug (assertions live).
+[profile.dev.package.zxing-cpp]
+opt-level = 3
+
+[profile.test.package.zxing-cpp]
+opt-level = 3
+
+# The profile that 'dist' will build with
+[profile.dist]
+inherits = "release"
+lto = "thin"

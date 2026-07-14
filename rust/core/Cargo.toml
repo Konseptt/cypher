@@ -1,0 +1,49 @@
+[package]
+name = "cypher-core"
+version = "0.1.7"
+edition = "2021"
+license = "MIT"
+description = "Cypher protocol core - wire format, crypto, fountain, sessions primitives (no_std-friendly, wasm-buildable)"
+repository = "https://github.com/konsept/cypher"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+# Crypto - RustCrypto stack (ring rejected: no scrypt); zeroize wipes key material
+aes-gcm = "0.10"
+x25519-dalek = { version = "2", features = ["static_secrets"] }
+ed25519-dalek = { version = "2", features = ["rand_core"] }
+hkdf = "0.12"
+sha2 = "0.10"
+hmac = "0.12"
+scrypt = "0.11"
+zeroize = { version = "1", features = ["zeroize_derive"] }
+unicode-normalization = "0.1"
+rand = "0.8"
+# Wire format
+crc = "3"          # CRC_16_IBM_3740 == binascii.crc_hqx(data, 0xFFFF)
+raptorq = "2"      # SAME crate the Python raptorq package binds - packet-compatible
+# Compression stage - same libzstd the Python zstandard package wraps.
+# C dependency: std-only, gated behind the `std` feature (off for wasm).
+zstd = { version = "0.13", optional = true }
+# Pure-Rust zstd DECODER for the wasm build (ruzstd has no encoder, so the
+# native encoder path stays on `zstd`). Always compiled; only used on the
+# decode path when the `compression` feature is off.
+ruzstd = "0.8"
+# Plumbing
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+getrandom = { version = "0.2", features = ["js"] }
+
+[features]
+default = ["compression", "fs"]
+# `compression` gates the C zstd compressor (won't build to wasm); `fs` gates
+# the file-backed TOFU store's std::fs I/O (no filesystem in wasm). The wasm32
+# build uses --no-default-features to exclude both; everything else (tofu's
+# in-memory store, session, transport) is std but wasm-fine and stays compiled.
+compression = ["dep:zstd"]
+fs = []

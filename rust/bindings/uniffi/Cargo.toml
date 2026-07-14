@@ -1,0 +1,20 @@
+[package]
+name = "cypher-ffi"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "UniFFI binding over cypher-core broadcast mode (Kotlin/Swift)"
+repository = "https://github.com/konsept/cypher"
+
+[lib]
+name = "cypher_ffi"
+crate-type = ["cdylib", "staticlib", "lib"]
+
+[[bin]]
+name = "uniffi-bindgen"
+path = "src/bin/uniffi-bindgen.rs"
+
+[dependencies]
+cypher-core = { path = "../../core" }
+uniffi = { version = "0.28", features = ["cli"] }
+thiserror = "2"

@@ -1,0 +1,23 @@
+{
+  "name": "cypher-wasm",
+  "type": "module",
+  "description": "wasm-bindgen TypeScript SDK over cypher-core broadcast mode",
+  "version": "0.1.7",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/konsept/cypher"
+  },
+  "files": [
+    "cypher_wasm_bg.wasm",
+    "cypher_wasm.js",
+    "cypher_wasm_bg.js",
+    "cypher_wasm.d.ts"
+  ],
+  "main": "cypher_wasm.js",
+  "types": "cypher_wasm.d.ts",
+  "sideEffects": [
+    "./cypher_wasm.js",
+    "./snippets/*"
+  ]
+}

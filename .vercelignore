@@ -1,0 +1,10 @@
+.git
+**/target
+rust/target
+rust/bindings/wasm/target
+node_modules
+demo/node_modules
+demo/dist
+*.mp4
+*.png
+*.ppm

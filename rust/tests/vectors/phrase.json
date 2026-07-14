@@ -1,0 +1,17 @@
+[
+  {
+    "spot_checks": {
+      "0": "able",
+      "1": "about",
+      "100": "axiom",
+      "1000": "fist",
+      "1500": "jeep",
+      "2000": "nose",
+      "3000": "spit",
+      "3858": "zoom",
+      "500": "cold"
+    },
+    "word_count": 3859,
+    "wordlist_sha256": "93ca9df059d5e142085dd9982d01a28c27c2c4882807588ffedcdedfaad4be04"
+  }
+]

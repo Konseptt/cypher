@@ -1,0 +1,4 @@
+module cypher_ffiFFI {
+    header "cypher_ffiFFI.h"
+    export *
+}

@@ -1,0 +1,37 @@
+name: Publish npm
+
+# Same version tags as release.yml, so one tag ships both binary and npm.
+# Auth is npm Trusted Publishing (OIDC) - no stored token; provenance is automatic.
+on:
+  push:
+    tags:
+      - '**[0-9]+.[0-9]+.[0-9]+*'
+
+permissions:
+  contents: read
+  id-token: write # OIDC token for trusted publishing
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+      - run: cargo install wasm-pack
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org # required for OIDC to fire
+          package-manager-cache: false
+      - run: npm install -g npm@latest # trusted publishing needs npm >= 11.5.1
+      - run: wasm-pack build --release --target bundler rust/bindings/wasm
+      - name: Set name and publish
+        working-directory: rust/bindings/wasm/pkg
+        run: |
+          v="${GITHUB_REF_NAME##*/}"; v="${v#v}" # tag -> version
+          npm pkg set name='@konsept/cypher' version="$v" \
+            repository.type=git \
+            repository.url='git+https://github.com/konsept/cypher.git'
+          npm publish --access public

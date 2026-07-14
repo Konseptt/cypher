@@ -1,0 +1,4 @@
+# GitHub Linguist: keep Rust as the repo's primary language. The browser demo
+# is an example (vendored JS libs + a bundled wasm SDK), so exclude it from
+# language stats - otherwise its JS/TS would overtake Rust on the repo page.
+demo/** linguist-vendored
