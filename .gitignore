@@ -29,4 +29,6 @@ CLAUDE.local.md
 
 # conformance vector PNGs are real committed artifacts, not noise
 !rust/tests/vectors/qr/*.png
+# social / SEO preview card for the browser demo
+!demo/public/og-card.png
 .vercel

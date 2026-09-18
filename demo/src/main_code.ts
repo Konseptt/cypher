@@ -431,39 +431,36 @@ const openInstructionsBtn = getEl("open-instructions");
 const closeModalTop = getEl("close-modal-top");
 const closeModalBtn = getEl("close-modal-btn");
 const dontShowAgainCheckbox = getEl<HTMLInputElement>("dont-show-again");
+const DISMISS_KEY = "cypher_dismiss_instructions";
 
 function showInstructions() {
-  instructionsModal.classList.add("show");
+  instructionsModal.hidden = false;
+  closeModalBtn.focus();
 }
 
 function hideInstructions() {
-  instructionsModal.classList.remove("show");
-  if (dontShowAgainCheckbox.checked) {
-    localStorage.setItem("cypher_dismiss_instructions", "true");
-  } else {
-    localStorage.setItem("cypher_dismiss_instructions", "false");
-  }
+  instructionsModal.hidden = true;
+  localStorage.setItem(
+    DISMISS_KEY,
+    dontShowAgainCheckbox.checked ? "true" : "false",
+  );
 }
 
-// Open modal on click
 openInstructionsBtn.addEventListener("click", () => {
-  dontShowAgainCheckbox.checked = localStorage.getItem("cypher_dismiss_instructions") === "true";
+  dontShowAgainCheckbox.checked = localStorage.getItem(DISMISS_KEY) === "true";
   showInstructions();
 });
 
-// Close modal handlers
 closeModalTop.addEventListener("click", hideInstructions);
 closeModalBtn.addEventListener("click", hideInstructions);
 instructionsModal.addEventListener("click", (e) => {
-  if (e.target === instructionsModal) {
-    hideInstructions();
-  }
+  if (e.target === instructionsModal) hideInstructions();
+});
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && !instructionsModal.hidden) hideInstructions();
 });
 
-// Show automatically on page load if not dismissed
-const isDismissed = localStorage.getItem("cypher_dismiss_instructions") === "true";
+const isDismissed = localStorage.getItem(DISMISS_KEY) === "true";
 dontShowAgainCheckbox.checked = isDismissed;
-if (!isDismissed) {
-  showInstructions();
-}
+if (!isDismissed) showInstructions();
 

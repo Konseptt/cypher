@@ -3,8 +3,29 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Cypher - Hand-drawn Optical Link</title>
-    <link rel="icon" href="data:," />
+    <title>Cypher - Send files screen-to-camera</title>
+    <meta name="description" content="Cypher sends files across an air gap as looping QR video. One device shows the codes; another films them with a camera. No Wi‑Fi, no Bluetooth - just light." />
+    <meta name="theme-color" content="#fdfaf2" />
+    <link rel="canonical" href="https://semaphore-smoky.vercel.app/" />
+
+    <!-- Open Graph / social preview -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://semaphore-smoky.vercel.app/" />
+    <meta property="og:title" content="Cypher - Send files screen-to-camera" />
+    <meta property="og:description" content="Move a file from one device to another using only a screen and a camera. No network required." />
+    <meta property="og:image" content="https://semaphore-smoky.vercel.app/og-card.png" />
+    <meta property="og:image:width" content="1280" />
+    <meta property="og:image:height" content="720" />
+    <meta property="og:image:alt" content="Cypher: send files screen-to-camera with QR loops - no Wi‑Fi, no Bluetooth" />
+    <meta property="og:site_name" content="Cypher" />
+
+    <!-- Twitter / X card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Cypher - Send files screen-to-camera" />
+    <meta name="twitter:description" content="Move a file from one device to another using only a screen and a camera. No network required." />
+    <meta name="twitter:image" content="https://semaphore-smoky.vercel.app/og-card.png" />
+
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23fdfaf2' stroke='%231a1a1a' stroke-width='2'/%3E%3Crect x='6' y='6' width='8' height='8' fill='%231a1a1a'/%3E%3Crect x='18' y='6' width='8' height='8' fill='%231a1a1a'/%3E%3Crect x='6' y='18' width='8' height='8' fill='%231a1a1a'/%3E%3Crect x='18' y='18' width='4' height='4' fill='%231a1a1a'/%3E%3C/svg%3E" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
@@ -558,8 +579,7 @@
       /* --- Modal / Instruction Popup --- */
       .modal-overlay {
         position: fixed;
-        top: 0;
-        left: 0;
+        inset: 0;
         width: 100%;
         height: 100%;
         background: rgba(0, 0, 0, 0.4);
@@ -568,13 +588,16 @@
         justify-content: center;
         align-items: center;
         z-index: 1000;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.2s ease-in-out;
       }
-      .modal-overlay.show {
-        opacity: 1;
-        pointer-events: auto;
+      .modal-overlay[hidden] {
+        display: none;
+      }
+      .modal-intro {
+        font-size: 14px;
+        line-height: 1.45;
+        color: #333;
+        margin: 0 0 18px 0;
+        text-align: center;
       }
       .modal-card {
         width: 90%;
@@ -774,27 +797,27 @@
     </style>
   </head>
   <body>
-    <!-- Spiral Rings visual decoration -->
-    <div class="spiral-ring spiral-ring-1"></div>
-    <div class="spiral-ring spiral-ring-2"></div>
-    <div class="spiral-ring spiral-ring-3"></div>
-    <div class="spiral-ring spiral-ring-4"></div>
-    <div class="spiral-ring spiral-ring-5"></div>
-    <div class="spiral-ring spiral-ring-6"></div>
-    <div class="spiral-ring spiral-ring-7"></div>
-    <div class="spiral-ring spiral-ring-8"></div>
-    <div class="spiral-ring spiral-ring-9"></div>
-    <div class="spiral-ring spiral-ring-10"></div>
-
     <div class="notebook-page">
+      <!-- Spiral rings (must live inside the page so left:-15px anchors to the notebook) -->
+      <div class="spiral-ring spiral-ring-1"></div>
+      <div class="spiral-ring spiral-ring-2"></div>
+      <div class="spiral-ring spiral-ring-3"></div>
+      <div class="spiral-ring spiral-ring-4"></div>
+      <div class="spiral-ring spiral-ring-5"></div>
+      <div class="spiral-ring spiral-ring-6"></div>
+      <div class="spiral-ring spiral-ring-7"></div>
+      <div class="spiral-ring spiral-ring-8"></div>
+      <div class="spiral-ring spiral-ring-9"></div>
+      <div class="spiral-ring spiral-ring-10"></div>
+
       <div class="paperclip"></div>
       <div class="coffee-stain"></div>
       <div class="margin-note">made by konsept</div>
       
       <!-- Yellow Post-it Note stuck to the page -->
       <div class="post-it">
-        <strong>💡 Handy Tip:</strong><br>
-        Webcam stream needs a clear, steady line of sight. If decoding takes too long, hold the screen closer!
+        <strong>Tip:</strong><br>
+        Hold the camera steady and close. Glare or blur slows decoding.
       </div>
 
       <!-- CSS Pencil lying at the bottom edge -->
@@ -805,14 +828,16 @@
       </div>
 
       <header>
-        <h1>Cypher Optical Link</h1>
+        <h1>Cypher</h1>
         <p>
-          optical data transmission protocol. files cross the air gap using wobbly QR loops, captured by camera on the other side.
+          Send a file from one device to another using only a screen and a camera.
+          The sender flashes QR codes; the receiver films them and rebuilds the file.
+          No Wi‑Fi, no Bluetooth - nothing leaves the room except light.
         </p>
         <nav style="display: flex; align-items: center; width: 100%;">
-          <button id="mode-send" aria-selected="true" class="tab-btn">Transmit Page</button>
-          <button id="mode-recv" aria-selected="false" class="tab-btn">Receive Page</button>
-          <button id="open-instructions" class="btn-sketch" style="margin-left: auto; padding: 6px 12px; font-size: 14px;" title="Show instructions">❓ Help</button>
+          <button id="mode-send" aria-selected="true" class="tab-btn">Send</button>
+          <button id="mode-recv" aria-selected="false" class="tab-btn">Receive</button>
+          <button id="open-instructions" class="btn-sketch" style="margin-left: auto; padding: 6px 12px; font-size: 14px;" title="Show instructions" type="button">Help</button>
         </nav>
       </header>
 
@@ -934,30 +959,32 @@
     </div>
 
     <!-- Instructions Modal Overlay -->
-    <div id="instructions-modal" class="modal-overlay">
+    <div id="instructions-modal" class="modal-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="instructions-title">
       <div class="modal-card">
         <div class="modal-tape"></div>
-        <button id="close-modal-top" class="modal-close-btn">&times;</button>
-        <h2 class="modal-title">How to use Cypher</h2>
+        <button id="close-modal-top" class="modal-close-btn" type="button" aria-label="Close">&times;</button>
+        <h2 id="instructions-title" class="modal-title">How to use Cypher</h2>
+        <p class="modal-intro">
+          One device <strong>sends</strong> a looping QR video. Another <strong>receives</strong> it with a camera.
+          Optional key phrase encrypts the transfer - leave it blank for a public broadcast.
+        </p>
         
         <div class="modal-section">
-          <h3>📤 Transmitting Files</h3>
+          <h3>Send</h3>
           <ol>
-            <li>Select a file in the <strong>File Loader Slot</strong>.</li>
-            <li>(Optional) Enter a <strong>Key Phrase</strong> for private/encrypted broadcast.</li>
-            <li>Adjust <strong>Velocity (FPS)</strong> if needed.</li>
-            <li>Click <strong>▶ Start Loop</strong> to begin flashing QR codes.</li>
-            <li>Use <strong>Popout</strong> to display in a separate window or <strong>Save video</strong> to record it.</li>
+            <li>Pick a file.</li>
+            <li>(Optional) Enter a key phrase - or hit Random Phrase.</li>
+            <li>Click <strong>Start Loop</strong>. Point the other device’s camera at this screen.</li>
+            <li><strong>Popout</strong> opens a bigger window; <strong>Save video</strong> records the loop to share later.</li>
           </ol>
         </div>
 
         <div class="modal-section">
-          <h3>📥 Receiving Files</h3>
+          <h3>Receive</h3>
           <ol>
-            <li>Enter the matching <strong>Key Phrase</strong> (if encrypted).</li>
-            <li>Click <strong>Start Camera</strong> and point it at the transmitter's screen.</li>
-            <li>Or upload a pre-recorded loop video using <strong>LOAD RECORDING...</strong>.</li>
-            <li>Keep the camera steady! The file downloads automatically when complete.</li>
+            <li>Enter the same key phrase (or leave blank if they did).</li>
+            <li>Click <strong>Start Camera</strong> and aim at the QR loop - or load a saved video.</li>
+            <li>Keep it steady. The file downloads when enough frames are read.</li>
           </ol>
         </div>
 
@@ -966,7 +993,7 @@
             <input type="checkbox" id="dont-show-again" />
             <span>Don't show this again</span>
           </label>
-          <button id="close-modal-btn" class="btn-sketch btn-sketch-primary">Got it!</button>
+          <button id="close-modal-btn" class="btn-sketch btn-sketch-primary" type="button">Got it</button>
         </div>
       </div>
     </div>
